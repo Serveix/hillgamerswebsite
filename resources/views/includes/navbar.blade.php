@@ -13,9 +13,10 @@
                 <li class="nav-item {{ Request::is('staff') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('staff') }}">Staff</a>
                 </li>
+
                 @auth
-                    @if(!Auth::user()->vipUser || Auth::user()->vipUser && !Auth::user()->vipUser->is_vip)
-                    <li class="nav-item {{ Request::is(route('vip')) ? 'active' : '' }}">
+                    @if(!Auth::user()->isVip())
+                    <li class="nav-item {{ Request::is('vip') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('vip') }}">Vuelvete VIP</a>
                     </li>
                     @endif

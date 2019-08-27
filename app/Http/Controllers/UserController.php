@@ -25,11 +25,7 @@ class UserController extends Controller
      */
     public function edit()
     {
-        if(Auth::user()->vipUser->is_vip)
-        {
-            return redirect('/');
-        }
-        return view('vip');
+        return Auth::user()->isVip() ? redirect('/') : view('vip');
     }
 
     /**

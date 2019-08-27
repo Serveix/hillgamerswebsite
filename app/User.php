@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class User extends Authenticatable
 {
@@ -63,6 +64,11 @@ class User extends Authenticatable
      */
     public function vipUser() {
         return $this->hasOne('App\VipUser', 'user_id');
+    }
+
+    public function isVip()
+    {
+        return $this->vipUser ? $this->vipUser->is_vip : false;
     }
 
 }
