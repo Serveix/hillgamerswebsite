@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Helpers\PayPal\PayPalClient;
+use App\User;
+use App\VipUser;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use PayPalCheckoutSdk\Orders\OrdersGetRequest;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        return view('profile')->with('user', Auth::user());
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -14,6 +25,10 @@ class UserController extends Controller
      */
     public function edit()
     {
+        if(Auth::user()->vipUser->is_vip)
+        {
+            return redirect('/');
+        }
         return view('vip');
     }
 
@@ -26,28 +41,29 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
+        Log::info('User sent paypal check request');
         $client = PayPalClient::client();
         $response = $client->execute(new OrdersGetRequest($request->input('orderId')));
         if ($response->statusCode === 200 && $response->result->status == "COMPLETED")
         {
-            $paidUntil = null;
-            switch($response->result->purchase_units[0]->amount->value)
-            {
-                case env('MONTHLY_PRICE'):
-                    $paidUntil = Carbon::now()->addMonth();
-                    break;
-                case env('LIFETIME_PRICE'):
-                default:
-            }
-            $user = User::create([
-                'name' => $request->input('name'),
-                'username' => $request->input('username'),
-                'email' => $request->input('email'),
-                'password' => Hash::make($request->input('password')),
-                'paypal_order_id' => $request->input('orderId'),
-                'paid_until' => $paidUntil,
-            ]);
-            Auth::loginUsingId($user->id, true);
+
+            $paidUntil = Carbon::now()->addMonth();
+            $user = Auth::user();
+            $pexInher = $user->pexInheritance();
+            $pexInher->parent = User::VIP_RANK;
+            $pexInher->save();
+
+            $vipUser = VipUser::updateOrCreate(
+                [
+                    'user_id' => $user->id,
+                    'permissions_inheritance_id' => $pexInher->id,
+                ],
+                [
+                'is_vip' => true,
+                'expiration_date' => $paidUntil]);
+
+            Log::info("User $user->realname (ID: $user->id, Pex name: $pexInher->child) bought VIP");
+
             return response()->json([
                 'success' => true,
                 'message' => $response->result->status,

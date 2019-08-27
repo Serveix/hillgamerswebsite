@@ -14,13 +14,14 @@
                     <li>Obten el doble de residencias y rentas</li>
                     <li>Desbloquea kits especiales para modos de juego</li>
                 </ul>
-                <button class="btn btn-primary">&iexcl;Conviertete en VIP ahora!</button>
+
                 <div id="paypal-button-container"></div>
             </div>
         </div>
     </div>
 @endsection
 @section('scripts')
+
     <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
@@ -35,6 +36,7 @@
                 })
             },
             onApprove: (data, actions) => {
+                debugger;
                 return actions.order.capture()
                     .then(details => registeringRequest(data))
                     .catch(details => {
@@ -48,13 +50,13 @@
         function registeringRequest(data)
         {
             swal({
-                title: 'Thank you!',
-                text: '{{ _('Your payment was successful and your account has been created') }}',
+                title: '¡Grácias!',
+                text: '{{ _('Tu pago ha sido tomado y estamos convirtiendote en VIP') }}',
                 button: {
-                    text: 'Loading...',
-                    closeModal: false,
+                    text: '¡Excelente!'
                 }
             })
+
             $.ajax({
                 type: 'POST',
                 url: '{{ route('vip')  }}',
@@ -65,9 +67,9 @@
                 if (response.success &&
                     status === 'success' &&
                     response.message === 'COMPLETED') {
+                    console.log('success')
                     swal.stopLoading()
-                    swal.close()
-                    window.location = "{{ route('home') }}"
+
                 } else if (!response.success && response.status === 'INCORRECT_FORM') {
                     swal.stopLoading()
                     swal.close()
@@ -78,6 +80,8 @@
                     swal.close()
                     swal('Error connecting to server', '{{ __('Error while processing payment') }}', 'error')
                 }
+            }).catch((e) => {
+                console.log(e)
             })
         }
     </script>

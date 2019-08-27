@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
             <div class="col text-center">
-                <form action="{{ route('login') }}">
+                <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="username" id="username">

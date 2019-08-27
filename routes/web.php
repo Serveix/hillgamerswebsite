@@ -18,7 +18,6 @@ Route::get('/', function () {
 Route::get('staff', 'StaffController@index')->name('staff');
 Auth::routes(['register' => false]);
 Route::post('login', 'Auth\LoginController@loginMinecraft');
-//Route::get('login', 'Auth\LoginController@login');
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('vip', 'UserController@edit')->name('vip');
-Route::post('vip', 'UserController@update');
+Route::get('vip', 'UserController@edit')->name('vip')->middleware('auth');
+Route::post('vip', 'UserController@update')->middleware('auth');
+Route::get('profile', 'UserController@index')->middleware('auth');

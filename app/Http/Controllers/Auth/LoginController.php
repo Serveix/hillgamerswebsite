@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -30,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * @return string
@@ -60,6 +59,7 @@ class LoginController extends Controller
 
             if ($inputPass == $dbPassArr[3]) {
                Auth::login($user, true);
+               return redirect('/');
             }
             else
             {

@@ -15,8 +15,6 @@
 		</div>
 	</div>
 </div>
-
-
-	<script src="https://code.jquery.com/jquery-1.11.2.min.js" type="text/javascript"></script>
 	<script src="js/main.js" type="text/javascript"></script>
+	<script src="https://leonardosnt.github.io/mc-player-counter/dist/mc-player-counter.min.js"></script>
 @endsection
