@@ -40,7 +40,7 @@
                 return actions.order.capture()
                     .then(details => registeringRequest(data))
                     .catch(details => {
-                        swal("Payment connection failed", `{{ __('There was an error connecting to the payments platform. We are investigating, please, reload the page or try again later.') }}`,
+                        swal("Payment connection failed", `There was an error connecting to the payments platform. We are investigating, please, reload the page or try again later.`,
                             "warning")
                         console.log(details)
                     })
@@ -51,7 +51,7 @@
         {
             swal({
                 title: '¡Grácias!',
-                text: '{{ _('Tu pago ha sido tomado y estamos convirtiendote en VIP') }}',
+                text: 'Tu pago ha sido tomado y estamos convirtiendote en VIP',
                 button: {
                     text: '¡Excelente!'
                 }
@@ -70,15 +70,10 @@
                     console.log('success')
                     swal.stopLoading()
 
-                } else if (!response.success && response.status === 'INCORRECT_FORM') {
-                    swal.stopLoading()
-                    swal.close()
-                    swal('Registration failed', `{{ __('We have registered the error and if payment went through, we will contact you as soon as possible to give you your account manually.') }}`,
-                        'error')
                 } else {
                     swal.stopLoading()
                     swal.close()
-                    swal('Error connecting to server', '{{ __('Error while processing payment') }}', 'error')
+                    swal('Error connecting to server', 'Error while processing payment', 'error')
                 }
             }).catch((e) => {
                 console.log(e)
