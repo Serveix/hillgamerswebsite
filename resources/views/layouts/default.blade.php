@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
 	<title>HillGamers: @yield('title')</title>
-	<meta name="description" content="MyServer is a revolutionary Minecraft server. You can join with the IP 'play.myserver.net'.">
-	<meta name="keywords" content="MyServer, MyServer.net, Minecraft Server, Minecraft, Fun, Play, Info, Website, Official">
+	<meta name="description" content="¡Servidor de Minecraft HillGamers con survival, residencias, parcelas y más!">
+	<meta name="keywords" content="Team Hill, Hill gamers, minecraft, server, survival">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="utf-8">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
