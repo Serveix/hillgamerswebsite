@@ -1,3 +1,6 @@
+/* ---------------------------------------------------
+	  GENERAL STYLES
+  ----------------------------------------------------- */
 html {
     scroll-behavior: smooth;
 }
@@ -8,6 +11,9 @@ body {
     color: #000000;
 }
 
+/* ---------------------------------------------------
+	  TYPOGRAPHY
+  ----------------------------------------------------- */
 h1,
 h2,
 h3,
@@ -70,11 +76,28 @@ a {
     line-height: 20px;
 }
 
+.text-poppins {
+    font-family: Poppins, 'sans-serif';
+}
+
+.text-primary {
+    color: #388e3b !important;
+}
+
+.text-secondary {
+    color: #0071ca !important;
+}
+
+/* ---------------------------------------------------
+	  BUTTONS
+  ----------------------------------------------------- */
 .btn {
     font-weight: 500;
     text-transform: uppercase;
     font-size: 14px;
     letter-spacing: 1.25px;
+    background-color: #ffffff;
+    color: #000000;
     border-radius: 4px;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     border: none !important;
@@ -86,39 +109,56 @@ a {
 }
 
 .btn.btn-primary {
-    background-color: #c62828;
+    background-color: #4caf4f;
     color: #ffffff;
 }
 
 .btn.btn-primary.btn-primary:hover {
-    background-color: #b71c1c;
+    background-color: #388e3b;
     color: #ffffff;
 }
 
 .btn.btn-primary.btn-primary:focus,
 .btn.btn-primary.btn-primary:active {
-    background-color: #8e0000 !important;
+    background-color: #1b5e1f !important;
     color: #ffffff !important;
 }
 
 .btn.btn-secondary {
-    background-color: #283593;
+    background-color: #0090ea;
     color: #ffffff;
 }
 
 .btn.btn-secondary.btn-secondary:hover {
-    background-color: #1a227e;
+    background-color: #0071ca;
     color: #ffffff;
 }
 
 .btn.btn-secondary.btn-secondary:focus,
 .btn.btn-secondary.btn-secondary:active {
-    background-color: #001064 !important;
+    background-color: #004399 !important;
     color: #ffffff !important;
 }
 
-/* BUTTON BACK TO TOP */
+.btn.btn-secondary-light {
+    color: #004399;
+    background-color: #e2f1fc;
+}
 
+.btn-secondary-light:hover {
+    color: #004399;
+    background-color: #b9dcf8 !important;
+}
+
+.btn-secondary-light:active,
+.btn-secondary-light:focus {
+    color: #004399;
+    background-color: #8cc7f4!important
+}
+
+/* ---------------------------------------------------
+	  BUTTON BACK TO TOP
+  ----------------------------------------------------- */
 #backTop {
     display: none;
     position: fixed;
@@ -128,7 +168,7 @@ a {
     font-size: 18px;
     border: none;
     outline: none;
-    background-color: #c62828;
+    background-color: #0090ea;
     color: #ffffff;
     cursor: pointer;
     padding: 10px;
@@ -141,7 +181,7 @@ a {
 }
 
 #backTop:hover {
-    background-color: #8e0000;
+    background-color: #0071ca;
     /* 7dp */
     box-shadow: 0px 4px 5px -2px rgba(0, 0, 0, 0.2), 0px 7px 10px 1px rgba(0, 0, 0, 0.14), 0px 2px 16px 1px rgba(0, 0, 0, 0.12);
 }
@@ -149,7 +189,6 @@ a {
 /* ---------------------------------------------------
 	  RIPPLE
   ----------------------------------------------------- */
-
 .ripple {
     position: relative;
     overflow: hidden;
@@ -183,6 +222,9 @@ a {
     transition: 0s;
 }
 
+/* ---------------------------------------------------
+	  NAVBAR
+  ----------------------------------------------------- */
 .navbar {
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
     margin-bottom: 20px;
@@ -235,13 +277,102 @@ a {
     background-color: #8e0000;
 }
 
+/* ---------------------------------------------------
+	  CARD
+  ----------------------------------------------------- */
 .card {
-	background-color: #ffffff;
-	border-radius: 8px;
-	box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
-  
-  .card.card:hover {
-	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-  }
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card.card:hover {
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.card-no-shadow {
+    box-shadow: none !important;
+    border: 1px solid #ffffff !important;
+}
+
+.card-no-shadow:hover {
+    box-shadow: none !important;
+    border: 1px solid #c5c5c5 !important;
+}
+
+.card-no-shadow:hover .fas  {
+    transform: rotatey(180deg);
+    transition: all .5s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+
+/* ---------------------------------------------------
+	  FORMS
+  ----------------------------------------------------- */
+.form-control {
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #929292;
+    background-color: #eeeeee;
+    background-clip: padding-box;
+    border: none;
+    border-bottom: 1.0px solid;
+    border-radius: 0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    transition: all .35s ease-in-out;
+}
+
+.form-control:focus,
+.form-control:active {
+    color: #0091ea;
+    background-color: #d3d3d3;
+    border-color: #0091ea !important;
+    box-shadow: none;
+    border-bottom: 1.5px solid;
+}
+
+/* ---------------------------------------------------
+	  SECTIONS
+  ----------------------------------------------------- */
+.section-welcome-background {
+    background-image: linear-gradient(to bottom, rgba(10, 104, 57, 0.6), rgba(10, 104, 57, 0.6)), url(/img/minecraft.jpg);
+    background-size: cover;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: -20px;
+    color: #ffffff;
+}
+
+.section-staff-background {
+    background-image: linear-gradient(to bottom, rgba(10, 104, 57, 0.6), rgba(10, 104, 57, 0.6)), url(/img/minecraft-2.jpg);
+    background-size: cover;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: -20px;
+    color: #ffffff;
+}
+
+.section-vip-background {
+    background-image: linear-gradient(to bottom, rgba(10, 104, 57, 0.6), rgba(10, 104, 57, 0.6)), url(/img/minecraft-3.jpg);
+    background-size: cover;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: -20px;
+    color: #ffffff;
+}
+
+.section-profile-background {
+    background-image: linear-gradient(to bottom, rgba(10, 104, 57, 0.6), rgba(10, 104, 57, 0.6)), url(/img/minecraft-4.jpg);
+    background-size: cover;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    margin-top: -20px;
+    color: #ffffff;
+}
