@@ -8,10 +8,10 @@
 	<div class="row">
 		<div class="col text-center">
 			Hay
-			<span data-playercounter-ip="mc.hillgamers.com:39535">
+			<span data-playercounter-ip="hillgamers.com">
 				0
 			</span>
-			jugadores en <span>mc.hillgamers.com:39535</span>
+			jugadores en <span>hillgamers.com</span>
 		</div>
 	</div>
 </div>
