@@ -23,7 +23,12 @@
                  @endif
 
                  <li class="nav-item {{ Request::is('profile') ? 'active' : '' }}">
-                     <a class="nav-link" href="/profile">{{ Auth::user()->realname }}</a>
+                     <a class="nav-link" href="/profile">
+                         {{ Auth::user()->realname }}
+                         @if(Auth::user()->isVip())
+                             <span class="badge badge-primary">VIP Member</span>
+                         @endif
+                     </a>
                  </li>
                  @endauth
                  @guest

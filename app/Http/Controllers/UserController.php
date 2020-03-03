@@ -9,7 +9,11 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use Laravel\Cashier\Exceptions\PaymentActionRequired;
+use Laravel\Cashier\Exceptions\PaymentFailure;
 use PayPalCheckoutSdk\Orders\OrdersGetRequest;
+use PhpParser\Builder\Property;
 
 class UserController extends Controller
 {
@@ -29,6 +33,56 @@ class UserController extends Controller
 
         return $user->isVip() ? redirect('/') : view('vip')->with('intent', $user->createSetupIntent());
     }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'paymentMethodId' => 'required'
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ocurrio un problema, intenta recargar la página'
+            ], 422);
+        }
+
+        /** @var User $user */
+        $user = Auth::user();
+
+        $paymentMethodId = $request->paymentMethodId;
+
+
+        try {
+            $user->newSubscription(env('STRIPE_MAIN_SUB'), env('STRIPE_MAIN_SUB_PLAN_ID'))
+                ->create($paymentMethodId, [
+                    'name' => $user->realname,
+                    'email' => $user->email
+                ]);
+
+            //todo change in database current rank
+            
+        } catch (PaymentActionRequired $e) {
+            //todo: implement correctly
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 422);
+        } catch (PaymentFailure $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 422);
+        }
+
+
+        return [
+            'success' => true,
+            'message' => 'Se ha realizado la suscripción con éxito. ¡Bienvenido a VIP!'
+        ];
+    }
+
 
     /**
      * Update the specified resource in storage.

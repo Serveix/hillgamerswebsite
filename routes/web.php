@@ -11,13 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', function () { return view('welcome'); });
 
 Route::get('staff', 'StaffController@index')->name('staff');
 Auth::routes(['register' => false]);
 Route::post('login', 'Auth\LoginController@loginMinecraft');
-Route::get('vip', 'UserController@edit')->name('vip')->middleware('auth');
-Route::post('vip', 'UserController@update')->middleware('auth');
-Route::get('profile', 'UserController@index')->middleware('auth');
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('profile', 'UserController@index');
+
+    Route::get('vip', 'UserController@edit')->name('vip');
+    Route::post('vip', 'UserController@update');
+    Route::get('vip/success', 'ShowSuccess')->name('success');
+});

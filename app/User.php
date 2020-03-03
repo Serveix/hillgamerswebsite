@@ -19,6 +19,13 @@ class User extends Authenticatable
     protected $table = 'authme';
 
     /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * @var bool
      */
     protected $rememberTokenName = false;
@@ -45,7 +52,7 @@ class User extends Authenticatable
 
     public function isVip()
     {
-        return $this->vipUser ? $this->vipUser->is_vip : false;
+        return $this->subscribed(env('STRIPE_MAIN_SUB'));
     }
 
 }

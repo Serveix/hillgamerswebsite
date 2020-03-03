@@ -85,10 +85,9 @@
 </div>
 @endsection
 @section('scripts')
-    <script src="https://js.stripe.com/v3/"></script>
-
+    <script src="https://js.stripe.com/v3"></script>
     <script>
-        const stripe = Stripe('{{ env('STRIPE_KEY') }}');
+        const stripe = Stripe('{{ env("STRIPE_KEY") }}');
 
         const elements = stripe.elements();
         const cardElement = elements.create('card');
@@ -101,15 +100,19 @@
         const errorsBox = document.getElementById('errors-box');
 
         cardButton.addEventListener('click', async (e) => {
+            errorsBox.innerHTML = '';
+            errorsBox.classList.add('display-none');
+            loading(true, "Verificando método de pago...");
+
             if (!cardHolderName.value) {
                 errorsBox.innerHTML = 'El nombre es requerido.';
                 errorsBox.classList.remove('display-none');
+                loading(false);
+
                 return;
             }
 
-            errorsBox.innerHTML = '';
-            errorsBox.classList.add('display-none');
-
+            //todo: only run this if paymentMethodId is not available, otherwise on server error the intentId will fail
             const { setupIntent, error } = await stripe.confirmCardSetup(
                 clientSecret, {
                     payment_method: {
@@ -123,9 +126,28 @@
                 console.log('error message to user', error.message);
                 errorsBox.innerHTML = error.message;
                 errorsBox.classList.remove('display-none');
+                loading(false);
             } else {
                 console.log('card verified successfully');
+                loading(true, "Creando suscripción...");
+
+                axios.post('{{ route('vip') }}', {
+                    paymentMethodId: setupIntent.payment_method
+                })
+                    .then(res => {
+                        window.location = '{{ route('success') }}'
+                    })
+                    .catch(error => {
+                        errorsBox.innerHTML = error;
+                        errorsBox.classList.remove('display-none');
+                        loading(false);
+                    });
             }
         });
+
+        function loading(isInProgress, message = "Cargando...") {
+            cardButton.innerHTML = isInProgress ? message : '¡Suscribirse!';
+            cardButton.disabled = isInProgress;
+        }
     </script>
 @endsection
