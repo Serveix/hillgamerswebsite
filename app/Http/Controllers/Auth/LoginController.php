@@ -47,8 +47,6 @@ class LoginController extends Controller
 
         $user = User::where($this->username(), $request->input($this->username()))->first();
 
-        Log::debug($user);
-
         if ($user)
         {
             $dbPassArr = explode('$', $user->password);

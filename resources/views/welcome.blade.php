@@ -24,15 +24,21 @@
     </div>
 </section><br>
 <div class="container">
-	<div class="row">
-		<div class="col text-center">
-			Hay
-			<span data-playercounter-ip="hillgamers.com">
-				0
-			</span>
-			jugadores en <span>hillgamers.com</span>
-		</div>
-	</div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="card">
+                <div class="card-body">
+                    <h2 >
+                        Hay
+                        <span class="font-weight-bold" data-playercounter-ip="mc.hillgamers.com">
+                            0
+                        </span>
+                        jugadores en: <br> <span class="text-poppins">mc.hillgamers.com</span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script src="js/main.js" type="text/javascript"></script>
 <script src="https://leonardosnt.github.io/mc-player-counter/dist/mc-player-counter.min.js"></script>

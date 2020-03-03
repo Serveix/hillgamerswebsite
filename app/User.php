@@ -7,10 +7,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, Billable;
 
     /**
      * @var string
@@ -28,35 +29,11 @@ class User extends Authenticatable
      * @param $rank
      * @return mixed
      */
-    public static function byRank($rank) {
-        // get all users who have the rank parameter
-        $inheritances = DB::table('permissions_inheritance')
-                        ->select('child')
-                        ->where('parent', $rank)
-                        ->where('type', 1)
-                        ->get()->pluck('child');
-
-        // get permissions table instance
-        $permissions = Permission::where('permission', 'name')->whereIn('name', $inheritances)->get(['value']);
-
-        return User::whereIn('username', $permissions)->get();
-    }
-
-    /**
-     * @param $name
-     * @return mixed
-     */
-    public static function pexInstanceByPexName($name)
+    public static function byRank($rank)
     {
-        return Permission::where('name', $name)->first();
-    }
+        $playersUsernames = LuckPermsPlayer::where('primary_group', $rank)->get(['username']);
 
-    /**
-     * @return mixed
-     */
-    public function pexInheritance() {
-        $permission = Permission::where('permission', 'name')->where('type', 1)->where('value', $this->realname)->first();
-        return PermissionsInheritance::where('child', $permission->name)->first();
+        return User::whereIn('username', $playersUsernames)->get();
     }
 
     /**

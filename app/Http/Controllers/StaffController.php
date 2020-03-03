@@ -9,7 +9,8 @@ class StaffController extends Controller
 {
     public function index()
     {
-        $staff = User::byRank('Admin');
+        $staff = User::byRank('admin');
+
         return view('staff')->with('staff', $staff);
     }
 }

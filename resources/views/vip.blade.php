@@ -1,19 +1,10 @@
 @extends('layouts.default')
 @section('title', 'Conviertete en VIP')
 @section('content')
-<section class="section-vip-background">
-    <div class="container">
-        <div class="row">
-            <div class="col text-center">
-                <h1 class="text-poppins  font-weight-bold">&iexcl;Conviertete en un Very Important Player!</h1>
-            </div>
-        </div>
-    </div>
-</section><br>
+
 <div class="container">
     <div class="row">
         <div class="col text-center">
-            <h2>&iexcl;Obtén beneficios geniales ahora!</h2><br>
             <div class="row">
                 <div class="col-6 col-md-4 mb-2">
                     <div class="card card-no-shadow">
@@ -57,70 +48,84 @@
                 </div>
             </div>
 
-            <div id="paypal-button-container"></div>
+
+
+        </div>
+        <div class="col-sm-4">
+            <div class="section-vip-background mb-2 text-center">
+                <h1 class="text-poppins font-weight-bold">&iexcl;Únete ahora!</h1>
+
+                <div class="card text-body mb-3">
+                    <div class="card-body">
+                        <strong>1 Mes: $59MXN/mes</strong>
+                    </div>
+                </div>
+
+                <div class="card text-body">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="card-holder-name">Nombre asociado a la tarjeta</label>
+                            <input id="card-holder-name" class="form form-control" type="text" required>
+                        </div>
+                        <div class="form-group">
+                            <!-- Stripe Elements Placeholder -->
+                            <div id="card-element"></div>
+                        </div>
+
+                        <div id="errors-box" class="text-danger font-weight-bold display-none"></div>
+
+                        <button id="card-button" class="btn btn-primary" data-secret="{{ $intent->client_secret }}">
+                            ¡Suscribirme!
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 @endsection
 @section('scripts')
+    <script src="https://js.stripe.com/v3/"></script>
 
-    <script src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
-        paypal.Buttons({
-            createOrder: (data, actions) => {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '{{ env('MONTHLY_PRICE') }}'
-                        }
-                    }]
-                })
-            },
-            onApprove: (data, actions) => {
-                debugger;
-                return actions.order.capture()
-                    .then(details => registeringRequest(data))
-                    .catch(details => {
-                        swal("Payment connection failed", `There was an error connecting to the payments platform. We are investigating, please, reload the page or try again later.`,
-                            "warning")
-                        console.log(details)
-                    })
+        const stripe = Stripe('{{ env('STRIPE_KEY') }}');
+
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+
+        cardElement.mount('#card-element');
+
+        const cardHolderName = document.getElementById('card-holder-name');
+        const cardButton = document.getElementById('card-button');
+        const clientSecret = cardButton.dataset.secret;
+        const errorsBox = document.getElementById('errors-box');
+
+        cardButton.addEventListener('click', async (e) => {
+            if (!cardHolderName.value) {
+                errorsBox.innerHTML = 'El nombre es requerido.';
+                errorsBox.classList.remove('display-none');
+                return;
             }
-        }).render('#paypal-button-container');
 
-        function registeringRequest(data)
-        {
-            swal({
-                title: '¡Grácias!',
-                text: 'Tu pago ha sido tomado y estamos convirtiendote en VIP',
-                button: {
-                    text: '¡Excelente!'
-                }
-            })
+            errorsBox.innerHTML = '';
+            errorsBox.classList.add('display-none');
 
-            $.ajax({
-                type: 'POST',
-                url: '{{ route('vip')  }}',
-                data: {
-                    orderId: data.orderID,
+            const { setupIntent, error } = await stripe.confirmCardSetup(
+                clientSecret, {
+                    payment_method: {
+                        card: cardElement,
+                        billing_details: { name: cardHolderName.value }
+                    }
                 }
-            }).done((response, status) => {
-                if (response.success &&
-                    status === 'success' &&
-                    response.message === 'COMPLETED') {
-                    console.log('success')
-                    swal.stopLoading()
+            );
 
-                } else {
-                    swal.stopLoading()
-                    swal.close()
-                    swal('Error connecting to server', 'Error while processing payment', 'error')
-                }
-            }).catch((e) => {
-                console.log(e)
-            })
-        }
+            if (error) {
+                console.log('error message to user', error.message);
+                errorsBox.innerHTML = error.message;
+                errorsBox.classList.remove('display-none');
+            } else {
+                console.log('card verified successfully');
+            }
+        });
     </script>
-
 @endsection

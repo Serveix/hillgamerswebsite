@@ -25,17 +25,19 @@ class UserController extends Controller
      */
     public function edit()
     {
-        return Auth::user()->isVip() ? redirect('/') : view('vip');
+        $user = Auth::user();
+
+        return $user->isVip() ? redirect('/') : view('vip')->with('intent', $user->createSetupIntent());
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @deprecated Changed to Stripe payments
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function updateWithPaypal(Request $request)
     {
         Log::info('User sent paypal check request');
         $client = PayPalClient::client();

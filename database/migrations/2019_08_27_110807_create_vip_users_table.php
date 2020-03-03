@@ -15,14 +15,8 @@ class CreateVipUsersTable extends Migration
     {
         Schema::create('vip_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('permissions_inheritance_id');
-            $table->foreign('permissions_inheritance_id')
-                    ->references('id')
-                    ->on('permissions_inheritance')
-                    ->onUpdate('CASCADE')
-                    ->onDelete('CASCADE');
-            $table->boolean('is_vip');
-            $table->date('expiration_date');
+            $table->unsignedMediumInteger('user_id');
+            $table->boolean('is_vip')->default(false);
             $table->timestamps();
         });
     }
