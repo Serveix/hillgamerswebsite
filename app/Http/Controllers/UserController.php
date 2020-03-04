@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Helpers\PayPal\PayPalClient;
+use App\LuckpermsPlayer;
+use App\LuckpermsUserPermission;
 use App\User;
 use App\VipUser;
 use Carbon\Carbon;
@@ -61,7 +63,21 @@ class UserController extends Controller
                     'email' => $user->email
                 ]);
 
-            //todo change in database current rank
+            $luckpermsPlayer = LuckpermsPlayer::where('username', $user->username)->first();
+            $luckpermsPlayer->primary_group = 'vip';
+            $luckpermsPlayer->save();
+
+            $userPermission = new LuckpermsUserPermission;
+            $userPermission->uuid = $luckpermsPlayer->uuid;
+            $userPermission->permission = 'group.vip';
+            $userPermission->value = true;
+            $userPermission->server = 'gloabl';
+            $userPermission->world = 'global';
+            $userPermission->expiry = 0;
+            $userPermission->contexts = '{}';
+            $userPermission->save();
+
+            LuckpermsUserPermission::where('uuid', $luckpermsPlayer->uuid)->where('permission', 'group.default')->delete();
             
         } catch (PaymentActionRequired $e) {
             //todo: implement correctly
