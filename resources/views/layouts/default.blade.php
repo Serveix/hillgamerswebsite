@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <title>HillGamers: @yield('title')</title>
     <meta name="description" content="¡Servidor de Minecraft HillGamers con survival, residencias, parcelas y más!">
@@ -15,7 +14,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pacifico|Roboto:400,500,700|Poppins:500&display=swap" crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ asset('css/staff.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @yield('styles')
 </head>
 
