@@ -38,7 +38,7 @@ class User extends Authenticatable
      */
     public static function byRank($rank)
     {
-        $playersUsernames = LuckPermsPlayer::where('primary_group', $rank)->get(['username']);
+        $playersUsernames = LuckpermsPlayer::where('primary_group', $rank)->get(['username']);
 
         return User::whereIn('username', $playersUsernames)->get();
     }
