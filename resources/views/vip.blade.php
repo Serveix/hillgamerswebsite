@@ -2,82 +2,79 @@
 @section('title', 'Conviertete en VIP')
 @section('content')
 
-<div class="container">
-    <div class="row">
-        <div class="col text-center">
-            <div class="row">
-                <div class="col-6 col-md-4 mb-2">
-                    <div class="card card-no-shadow">
-                        <div class="card-body">
-                            <i class="fas fa-sliders-h fa-3x mb-2 text-secondary"></i>
-                            <h3>Elige y cambia tu skin en el server</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 mb-2">
-                    <div class="card card-no-shadow">
-                        <div class="card-body">
-                            <i class="fas fa-tag fa-3x mb-2 text-secondary"></i>
-                            <h3>Obtén el clan TAG [VIP] en el chat</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 mb-2">
-                    <div class="card card-no-shadow">
-                        <div class="card-body">
-                            <i class="fas fa-user fa-3x mb-2 text-secondary"></i>
-                            <h3>Cambia tu nickname</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 mb-2">
-                    <div class="card card-no-shadow">
-                        <div class="card-body">
-                            <i class="fas fa-home fa-3x mb-2 text-secondary"></i>
-                            <h3>Obtén el doble de residencias y rentas</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-4 mb-2">
-                    <div class="card card-no-shadow">
-                        <div class="card-body">
-                            <i class="fas fa-unlock fa-3x mb-2 text-secondary"></i>
-                            <h3>Desbloquea kits especiales para modos de juego</h3>
-                        </div>
-                    </div>
+<div class="container mt-4">
+    <div class="row justify-content-center my-4">
+        <div class="col-md-6">
+            <h3 class="text-center font-weight-bold">&iexcl;Únete ahora!</h3>
+
+            <div class="card card-outline mb-3">
+                <div class="card-body text-center">
+                    <h6 class="text-primary font-weight-bold">1 Mes: $59MXN/mes</h6>
                 </div>
             </div>
 
-
-
-        </div>
-        <div class="col-sm-4">
-            <div class="section-vip-background mb-2 text-center">
-                <h1 class="text-poppins font-weight-bold">&iexcl;Únete ahora!</h1>
-
-                <div class="card text-body mb-3">
-                    <div class="card-body">
-                        <strong>1 Mes: $59MXN/mes</strong>
+            <div class="card card-outline">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="card-holder-name">Nombre asociado a la tarjeta</label>
+                        <input id="card-holder-name" class="form form-control" type="text" required>
                     </div>
+                    <div class="form-group">
+                        <!-- Stripe Elements Placeholder -->
+                        <div id="card-element"></div>
+                    </div>
+
+                    <div id="errors-box" class="text-danger font-weight-bold display-none"></div>
+
+                    <button id="card-button" class="btn btn-primary" data-secret="{{ $intent->client_secret }}">
+                        ¡Suscribirme!
+                    </button>
                 </div>
+            </div>
+        </div>
+    </div>
 
-                <div class="card text-body">
-                    <div class="card-body">
-                        <div class="form-group">
-                            <label for="card-holder-name">Nombre asociado a la tarjeta</label>
-                            <input id="card-holder-name" class="form form-control" type="text" required>
-                        </div>
-                        <div class="form-group">
-                            <!-- Stripe Elements Placeholder -->
-                            <div id="card-element"></div>
-                        </div>
-
-                        <div id="errors-box" class="text-danger font-weight-bold display-none"></div>
-
-                        <button id="card-button" class="btn btn-primary" data-secret="{{ $intent->client_secret }}">
-                            ¡Suscribirme!
-                        </button>
-                    </div>
+    <div class="row my-3">
+        <div class="col-md-12 my-3">
+            <h3 class="text-center font-weight-bold">Beneficios</h3>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="card bg-primary card-no-shadow">
+                <div class="card-body">
+                    <i class="fas fa-sliders-h fa-3x mb-2 text-secondary"></i>
+                    <h6 class="text-white">Elige y cambia tu skin en el server</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="card bg-primary card-no-shadow">
+                <div class="card-body">
+                    <i class="fas fa-tag fa-3x mb-2 text-secondary"></i>
+                    <h6 class="text-white">Obtén el clan TAG [VIP] en el chat</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="card bg-primary card-no-shadow">
+                <div class="card-body">
+                    <i class="fas fa-user fa-3x mb-2 text-secondary"></i>
+                    <h6 class="text-white">Cambia tu nickname</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="card bg-primary card-no-shadow">
+                <div class="card-body">
+                    <i class="fas fa-home fa-3x mb-2 text-secondary"></i>
+                    <h6 class="text-white">Obtén el doble de residencias y rentas</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mb-2">
+            <div class="card bg-primary card-no-shadow">
+                <div class="card-body">
+                    <i class="fas fa-unlock fa-3x mb-2 text-secondary"></i>
+                    <h6 class="text-white">Desbloquea kits especiales para modos de juego</h6>
                 </div>
             </div>
         </div>

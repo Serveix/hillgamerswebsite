@@ -19,7 +19,6 @@
 <body>
     @include('includes.navbar')
         @yield('content')
-3
     <script src="{{ asset('js/app.js') }}"></script>
     @yield('scripts')
 </body>

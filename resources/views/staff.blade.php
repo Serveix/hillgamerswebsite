@@ -4,6 +4,9 @@
 <section class="section-staff-background">
     <div class="container mt-3">
         <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="img/logo/team-hill.jpg" alt="Team Hill logo" class="img-fluid">
+            </div>
             <div class="col-12 text-center">
                 <h3 class="font-weight-bold">&iexcl;Estamos para ayudarte!</h3>
             </div>
