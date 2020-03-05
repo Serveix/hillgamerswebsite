@@ -4,7 +4,7 @@
 <div class="container my-5">
     <div class="row">
         <div class="col-md-8">
-            <h2 class="text-poppins font-weight-bold">HillGamers</h2>
+            <h2 class="font-weight-bold">HillGamers</h2>
             <h4>¡Servidor de Minecraft HillGamers con survival, residencias, <br> parcelas y más!</h4>
             <br>
             <a href="/vip" class="btn btn-primary">Vuelvete VIP</a>

@@ -2,10 +2,10 @@
 @section('title', 'Staff')
 @section('content')
 <section class="section-staff-background">
-    <div class="container">
+    <div class="container mt-3">
         <div class="row">
-            <div class="col text-center">
-                <h1 class="text-poppins  font-weight-bold">&iexcl;Estamos para ayudarte!</h1>
+            <div class="col-12 text-center">
+                <h3 class="font-weight-bold">&iexcl;Estamos para ayudarte!</h3>
             </div>
         </div>
     </div>
