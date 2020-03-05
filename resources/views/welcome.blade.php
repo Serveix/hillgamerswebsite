@@ -1,40 +1,45 @@
 @extends('layouts.default')
 @section('title', 'Inicio')
-@section('styles')
-<link rel="stylesheet" href="css/home.css">
-@endsection
 @section('content')
-<section class="section-welcome-background">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h1 class="text-poppins font-weight-bold">Hillgamers</h1>
-            </div>
-            <div class="col-12">
-                <h2>¡Servidor de Minecraft HillGamers con survival, residencias, <br> parcelas y más!</h2>
-                <br>
-                <a href="/vip" class="btn btn-secondary-light">Vuelvete VIP</a>
-                @guest
-                <a href="/login" class="btn">¡Empieza ahora!</a>
-                @else 
-                <a href="/profile" class="btn">Bienvenido</a>
-                @endguest
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="text-poppins font-weight-bold">HillGamers</h2>
+            <h4>¡Servidor de Minecraft HillGamers con survival, residencias, <br> parcelas y más!</h4>
+            <br>
+            <a href="/vip" class="btn btn-primary">Vuelvete VIP</a>
+            @guest
+            <a href="/login" class="btn btn-primary">¡Empieza ahora!</a>
+            @else
+            <a href="/profile" class="btn btn-primary">Bienvenido</a>
+            @endguest
+        </div>
+        <div class="col-md-4">
+            <div class="cube360">
+                <div class="cube">
+                    <div class="front-side"><img src="https://i.pinimg.com/originals/27/bb/f7/27bbf79998317ed46ebab78e8d936172.png"></div>
+                    <div class="back-side"><img src="https://i.pinimg.com/originals/27/bb/f7/27bbf79998317ed46ebab78e8d936172.png"></div>
+                    <div class="left-side"><img src="https://i.pinimg.com/originals/27/bb/f7/27bbf79998317ed46ebab78e8d936172.png"></div>
+                    <div class="right-side"><img src="https://i.pinimg.com/originals/27/bb/f7/27bbf79998317ed46ebab78e8d936172.png"></div>
+                    <div class="top-side"><img src="https://i.pinimg.com/originals/27/bb/f7/27bbf79998317ed46ebab78e8d936172.png"></div>
+                    <div class="bottom-side"><img src="https://i.pinimg.com/originals/27/bb/f7/27bbf79998317ed46ebab78e8d936172.png"></div>
+                </div>
             </div>
         </div>
     </div>
-</section><br>
-<div class="container">
+</div>
+<div class="container my-5">
     <div class="row">
-        <div class="col-12 text-center">
-            <div class="card">
+        <div class="col-md-12 text-center">
+            <div class="card card-static-elevation">
                 <div class="card-body">
-                    <h2 >
+                    <h4>
                         Hay
                         <span class="font-weight-bold" data-playercounter-ip="mc.hillgamers.com">
                             0
                         </span>
-                        jugadores en: <br> <span class="text-poppins">mc.hillgamers.com</span>
-                    </h2>
+                        jugadores en: <br> <span class="text-primary">mc.hillgamers.com</span>
+                    </h4>
                 </div>
             </div>
         </div>
