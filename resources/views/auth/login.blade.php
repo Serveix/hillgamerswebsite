@@ -2,13 +2,13 @@
 @section('title', 'Iniciar sesión')
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-6">
+    <div class="row justify-content-center mt-5">
+        <div class="col-12 col-md-8 col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <div class="col-12 text-center mb-5">
-                        <h3 class="font-weight-bold text-poppins">Iniciar sesión</h3>
-                        <h5>Ingresa con tu cuenta del servidor del juego</h5>
+                        <h4 class="font-weight-bold text-poppins">Iniciar sesión</h4>
+                        <h6 class="text-muted">Ingresa con tu cuenta del servidor del juego</h6>
                     </div>
                     <form action="{{ route('login') }}" method="POST" class="form-row">
                         @csrf

@@ -4,8 +4,8 @@
 <div class="container my-5">
     <div class="row">
         <div class="col-md-8">
-            <h2 class="font-weight-bold">HillGamers</h2>
-            <h4>¡Servidor de Minecraft HillGamers con survival, residencias, <br> parcelas y más!</h4>
+            <h3 class="font-weight-bold">HillGamers</h3>
+            <h5>¡Servidor de Minecraft HillGamers con survival, residencias, <br> parcelas y más!</h5>
             <br>
             <a href="/vip" class="btn btn-primary">Vuelvete VIP</a>
             @guest
@@ -33,13 +33,13 @@
         <div class="col-md-12 text-center">
             <div class="card card-static-elevation">
                 <div class="card-body">
-                    <h4>
+                    <h5>
                         Hay
                         <span class="font-weight-bold" data-playercounter-ip="mc.hillgamers.com">
                             0
                         </span>
                         jugadores en: <br> <span class="text-primary">mc.hillgamers.com</span>
-                    </h4>
+                    </h5>
                     <h6 class="mt-4 text-muted">Versión: 15.1.2</h6>
                 </div>
             </div>
@@ -49,21 +49,21 @@
         <div class="col-md-12 mb-3">
             <h4 class="font-weight-bold">Algunos mods como</h4>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3">
             <div class="card bg-primary card-static-elevation">
                 <div class="card-body text-center">
                     <h6 class="text-white">Factions</h6>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3">
             <div class="card bg-primary card-static-elevation">
                 <div class="card-body text-center">
                     <h6 class="text-white">Backpacks</h6>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 mb-3">
             <div class="card bg-primary card-static-elevation">
                 <div class="card-body text-center">
                     <h6 class="text-white">Transportes</h6>
