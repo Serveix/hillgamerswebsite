@@ -34,6 +34,10 @@
                  </li>
                  @endauth
                  @guest
+                 <li class="nav-item">
+                     <a class="nav-link" href="https://www.minecraft.net/en-us/community-standards">Community Standards</a>
+                 </li>
+
                  <li class="nav-item {{ Request::is(route('login')) ? 'active' : '' }}">
                      <a class="nav-link" href="{{ route('login') }}">Iniciar sesi&oacute;n</a>
                  </li>
